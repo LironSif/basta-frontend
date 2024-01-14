@@ -1,9 +1,9 @@
 import {Container, Grid, useMediaQuery } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
-import {products} from "../../Data"
+// import {products} from "../../Data"
 import SingleShop from "./SingleShop"
 import SingleShopDesktop from "./SingleShopDesktop"
-
+import axios from "axios"
 
 export default function ShopList(){
     const theme= useTheme()
