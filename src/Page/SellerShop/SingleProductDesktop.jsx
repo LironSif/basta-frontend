@@ -8,7 +8,7 @@ export default function SingleProductDesktop({product, matches}){
     return (
        <>
            <Product>
-            <ProductImage src= {product.image}/>
+            <ProductImage src= {product?.image}/>
             
         </Product>
         <ProductMeta product={product} matches={matches}/>
