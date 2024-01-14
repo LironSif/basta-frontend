@@ -14,7 +14,7 @@ export const NavigateLocation = () => {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
     };
-    fetch("https://basta-2zr3.onrender.com/location", {
+    fetch("https://basta-2zr3.onrender.com/api/v1/location", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
