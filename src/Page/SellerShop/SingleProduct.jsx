@@ -10,7 +10,7 @@ export default function SingleProduct({product, matches}){
        <>
            <Product>
             
-            <ProductImage src= {product.image}/>
+            <ProductImage src= {product?.image}/>
             <ProductMeta product={product} matches={matches}/>
             
         </Product>
