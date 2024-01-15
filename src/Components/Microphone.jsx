@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import { CircularProgress, Typography, Container, Box } from '@mui/material';
+import React, { useEffect, useRef, useState } from "react";
 import MicIcon from "@mui/icons-material/Mic";
 import TranslateIcon from '@mui/icons-material/Translate';
 export default function Microphone({ setProducts }) {
@@ -34,6 +35,7 @@ export default function Microphone({ setProducts }) {
     }
   }
   async function sendAudioToServer() {
+    setLoading(true)
     const audioBlob = new Blob(audioChunks.current, { type: "audio/wav" });
     const formData = new FormData();
     formData.append("audio", audioBlob);
@@ -45,13 +47,38 @@ export default function Microphone({ setProducts }) {
       });
       const data = await response.json();
       setProducts(data.items);
+      setLoading(false)
     } catch (error) {
-      
+
       console.error("Error sending audio to server:", error);
     }
   }
+  const [loading, setLoading] = useState(true);
+  // Assume fetchData is a function that fetches data from the server
+  const fetchData = async () => {
+    try {
+      // Simulate a delay to show the loading spinner
+      // In your actual code, replace this with your data fetching logic
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setLoading(false); // Set loading to false when data is fetched
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setLoading(false); // Handle errors and set loading to false
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <div style={{ width: "80vw", height: "80vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+    {loading ? (
+      
+        // Display loading spinner while waiting for data
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+      <div>
       <div style={{ border: "1px solid white", borderRadius: "50%", padding: "5vw" }}>
         <MicIcon
           style={{ backgroundColor: isRecording ? "red" : "green", border: "1px solid white", borderRadius: "50%", padding: "10vw" }}
@@ -65,6 +92,9 @@ export default function Microphone({ setProducts }) {
       <div style={{ padding: "1vw", margin: "15px", border: "1px solid white", backgroundColor: !isTranslate ? "white" : "black" }}>
         <TranslateIcon onClick={() => setIsTranslate(t =>!t)} style={{ color: isTranslate ? "white" : "black" }} />
 </div>
+
+</div>
+)}
 </div>
 );
 }
