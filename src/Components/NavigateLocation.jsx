@@ -27,7 +27,7 @@ export const NavigateLocation = () => {
   return (
     <NavigationIcon
       onClick={() => getLocation()}
-      style={{ color: "green", fontSize: 20, transform: "rotate(45deg)" }}
+      style={{ color: "green", fontSize: 25, transform: "rotate(45deg)", marginRight: "100px"}}
     />
   );
 };

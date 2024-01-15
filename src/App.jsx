@@ -14,8 +14,9 @@ function App() {
 
   return (
     <>
+    <Container  style={{height:"90vh"}}>
       <BrowserRouter>
-        {isClicked &&  <Navbar />}
+        {isClicked &&  <Navbar setIsClicked={setIsClicked} />}
         <Routes>
           {!isClicked && <Route path="/" element={<Homepage setIsClicked={setIsClicked}/>} />}
           {/* <Route path="/preview" element={<Preview />} /> */}
@@ -23,6 +24,7 @@ function App() {
           <Route path="/shopsList" element={<ShopsPage />} />
         </Routes>
       </BrowserRouter>
+    </Container>
     </>
   );
 }

@@ -17,22 +17,28 @@ import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { NavigateLocation } from "../NavigateLocation";
+import { useNavigate } from "react-router";
 //import Actions from "./Actions";
 
 
 
-export default function NavbarDT({matches})  {
+export default function NavbarDT({matches, setIsClicked})  {
 //const {setShowSearchBox}= useUIContext()
+let navigate = useNavigate()
  return(
- <NavbarContainer>
-    <NavbarHeader variant="h4">BSTA</NavbarHeader>
-    <MyList type="row">
+ <NavbarContainer  style={{width:"99vw"}} justifyContent={"space-between"}>
+    <NavbarHeader variant="h4" onClick={()=>{
+      setIsClicked(false)
+      navigate("/")
+    }}>BSTA</NavbarHeader>
+    {/* <MyList type="row"> */}
   
-      <ListItemText primary="Location"/>
+      {/* <ListItemText primary="Location"/> */}
       
+      <NavigateLocation/> 
       
-      
-        </MyList>
+        {/* </MyList> */}
         
   </NavbarContainer>
 )
