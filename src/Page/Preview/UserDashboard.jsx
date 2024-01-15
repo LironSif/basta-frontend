@@ -110,8 +110,7 @@
 
 // export default UserDashboard;
 
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Button,
   TextField,
@@ -128,36 +127,50 @@ import {
   Box,
   createTheme,
   ThemeProvider,
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import Microphone from "../../Components/Microphone";
 
 const initialProducts = [
-  { id: 1, name: 'Product A', price: 20 },
-  { id: 2, name: 'Product B', price: 30 },
+  
+   
+  {item: 'Fresh Tomatoes', price: '5 ILS', unit: 'per kilogram', image: 'URL placeholder for Fresh Tomatoes'},
+  
+   
+  {item: 'Crisp Cucumbers', price: '3 ILS', unit: 'each', image: 'URL placeholder for Crisp Cucumbers'},
+  
+   
+  {item: 'Juicy Apples', price: '4 ILS', unit: 'per kilogram', image: 'URL placeholder for Juicy Apples'},
+  
+   
+  {item: 'Sweet Oranges', price: '3 ILS', unit: 'per kilogram', image: 'URL placeholder for Sweet Oranges'}
+  
   // Add more initial products as needed
 ];
 
 const theme = createTheme({
   typography: {
-    fontFamily: ['Rubik', 'sans-serif'].join(','),
+    fontFamily: ["Rubik", "sans-serif"].join(","),
   },
 });
 
 const UserDashboard = () => {
-  const [products, setProducts] = useState(initialProducts);
-  const [newProduct, setNewProduct] = useState({ name: '', price: '' });
+  const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState({ name: "", price: "" });
   const [editProduct, setEditProduct] = useState(null);
 
   const handleAddProduct = () => {
     if (newProduct.name && newProduct.price) {
       setProducts([...products, { id: Date.now(), ...newProduct }]);
-      setNewProduct({ name: '', price: '' });
+      setNewProduct({ name: "", price: "" });
     }
   };
 
   const handleDeleteProduct = (productId) => {
-    const updatedProducts = products.filter((product) => product.id !== productId);
+    const updatedProducts = products.filter(
+      (product) => product.id !== productId
+    );
     setProducts(updatedProducts);
   };
 
@@ -180,101 +193,128 @@ const UserDashboard = () => {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          backgroundColor: '#b5e7a0',
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          backgroundColor: "#b5e7a0",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
           p: { xs: 2, md: 4 },
         }}
       >
         <Container component="main" maxWidth="md">
-          <Box my={4}>
-            <Typography variant="h4" align="center" gutterBottom>
-              User Dashboard
-            </Typography>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>ID</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Price</TableCell>
-                    <TableCell>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {products.map((product) => (
-                    <TableRow key={product.id}>
-                      <TableCell>{product.id}</TableCell>
-                      <TableCell>
-                        {editProduct?.id === product.id ? (
-                          <TextField
-                            value={editProduct.name}
-                            onChange={(e) => setEditProduct({ ...editProduct, name: e.target.value })}
-                          />
-                        ) : (
-                          product.name
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        {editProduct?.id === product.id ? (
-                          <TextField
-                            value={editProduct.price}
-                            onChange={(e) =>
-                              setEditProduct({ ...editProduct, price: e.target.value })
-                            }
-                          />
-                        ) : (
-                          product.price
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        {editProduct?.id === product.id ? (
-                          <Button variant="contained" onClick={handleUpdateProduct}>
-                            Update
-                          </Button>
-                        ) : (
-                          <>
-                            <IconButton onClick={() => handleEditProduct(product.id)}>
-                              <EditIcon />
-                            </IconButton>
-                            <IconButton onClick={() => handleDeleteProduct(product.id)}>
-                              <DeleteIcon />
-                            </IconButton>
-                          </>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-
-            <Box mt={4}>
-              <Typography variant="h5" align="center" gutterBottom>
-                Add New Product
+              <Typography variant="h4" align="center" gutterBottom>
+                User Dashboard
               </Typography>
-              <TextField
-                label="Name"
-                fullWidth
-                value={newProduct.name}
-                onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-              />
-              <TextField
-                label="Price"
-                fullWidth
-                value={newProduct.price}
-                onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
-              />
-              <Box mt={2} display="flex" justifyContent="center">
-                <Button variant="contained" color="primary" onClick={handleAddProduct}>
-                  Add Product
-                </Button>
+            <Box my={4}>
+          {products.length == 0 ? (
+            <Microphone setProducts={setProducts} />
+          ) : (
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>ID</TableCell>
+                      <TableCell>Name</TableCell>
+                      <TableCell>Price</TableCell>
+                      <TableCell>Actions</TableCell>
+                    </TableRow>
+                  </TableHead>
+
+                  <TableBody>
+                    {products.map((product , index) => (
+                      <TableRow key={index + 1}>
+                        <TableCell>{index + 1}</TableCell>
+                        <TableCell>
+                          {editProduct?.id === index ? (
+                            <TextField
+                              value={editProduct.item}
+                              onChange={(e) =>
+                                setEditProduct({
+                                  ...editProduct,
+                                  name: e.target.value,
+                                })
+                              }
+                            />
+                          ) : (
+                            product.item
+                          )}
+                        </TableCell>
+                        <TableCell>
+                          {editProduct?.id === index + 1  ? (
+                            <TextField
+                              value={editProduct.price}
+                              onChange={(e) =>
+                                setEditProduct({
+                                  ...editProduct,
+                                  price: e.target.value,
+                                })
+                              }
+                            />
+                          ) : (
+                            product.price
+                          )}
+                        </TableCell>
+                        <TableCell>
+                          {editProduct?.id === index + 1 ? (
+                            <Button
+                              variant="contained"
+                              onClick={handleUpdateProduct}
+                            >
+                              Update
+                            </Button>
+                          ) : (
+                            <>
+                              <IconButton
+                                onClick={() => handleEditProduct(index + 1)}
+                              >
+                                <EditIcon />
+                              </IconButton>
+                              <IconButton
+                                onClick={() => handleDeleteProduct(index + 1)}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                            </>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+)}
+              <Box mt={4}>
+                <Typography variant="h5" align="center" gutterBottom>
+                  Add New Product
+                </Typography>
+                <TextField
+                  label="Name"
+                  fullWidth
+                  value={newProduct.item}
+                  onChange={(e) =>
+                    setNewProduct({ ...newProduct, item: e.target.value })
+                  }
+                />
+                <TextField
+                  label="Price"
+                  fullWidth
+                  value={newProduct.price}
+                  onChange={(e) =>
+                    setNewProduct({ ...newProduct, price: e.target.value })
+                  }
+                />
+                <Box mt={2} display="flex" justifyContent="center">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleAddProduct}
+                  >
+                    Add Product
+                  </Button>
+                </Box>
               </Box>
             </Box>
-          </Box>
         </Container>
       </Box>
     </ThemeProvider>
