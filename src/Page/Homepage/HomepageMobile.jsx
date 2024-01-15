@@ -19,7 +19,7 @@ export default function HomepageMobile({ setIsClicked }) {
         style={{ width: "250px" , cursor: "pointer"}} 
         onClick={() => {
           setIsClicked(true);
-          navigate("/sellerList");
+          navigate("/instruction/seller");
         }}
       >
         Seller
@@ -28,7 +28,7 @@ export default function HomepageMobile({ setIsClicked }) {
         style={{ width: "250px" , cursor: "pointer"}}
         onClick={() => {
           setIsClicked(true);
-          navigate("/shopsList");
+          navigate("/instruction/buyer");
         }}
       >
         User

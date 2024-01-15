@@ -19,7 +19,7 @@ export default function HomepageDesktop({ setIsClicked }) {
         style={{ width: "50vw", cursor: "pointer" }}
         onClick={() => {
           setIsClicked(true);
-          navigate("/sellerList");
+          navigate("/instruction/seller");
         }}
       >
         Seller
@@ -28,7 +28,7 @@ export default function HomepageDesktop({ setIsClicked }) {
         style={{ width: "50vw", cursor: "pointer" }}
         onClick={() => {
           setIsClicked(true);
-          navigate("/shopsList");
+          navigate("/instruction/buyer");
         }}
       >
         User
