@@ -6,7 +6,7 @@ export default function HomepageDesktop({ setIsClicked }) {
   let navigate = useNavigate();
   return (
     <Box
-      style={{ width: "99vw" , height:"80vh"}}
+      style={{ width: "85vw" , height:"80vh"}}
       margin={"auto"}
       display={"flex"}
       flexDirection={"row"}

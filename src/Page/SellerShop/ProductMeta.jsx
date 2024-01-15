@@ -12,7 +12,7 @@ export default function ProductMeta({product, matches}){
 
             <Typography 
             variant={matches? "caption":"body1"}>
-                {product.price}₪ <sub>{product.unit}</sub>
+                {product.price} <sub>{product.unit}</sub>
             </Typography>    
         </ProductMetaWrapper>
     )
