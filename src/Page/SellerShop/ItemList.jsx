@@ -6,28 +6,28 @@ import SingleProductDesktop from "./SingleProductDesktop";
 import Cards from "../../Components/Cards";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Microphone from "../../Components/Microphone";
 
 export default function ItemList() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
   const url = "https://basta-2zr3.onrender.com/api/v1";
 
   useEffect(() => {
-    fetchingItems();
+    // fetchingItems();
   }, []);
 
-  const fetchingItems = async () => {
-    try {
-      setError("");
-      setLoading(true);
-      const response = await axios.get(url + "/items");
-      setProducts(response.data);
-      setLoading(false);
-    } catch (error) {
-      setError(error);
-    }
-  };
+  // const fetchingItems = async () => {
+  //   try {
+  //     setError("");
+  //     setLoading(true);
+  //     const response = await axios.get(url + "/items");
+  //     setProducts(response.data);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     setError(error);
+  //   }
+  // };
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const renderProducts = products.map((product) => (
@@ -49,10 +49,8 @@ export default function ItemList() {
   ));
   return (
     <Container>
-      {loading ? (
-        <h1>Loading</h1>
-      ) : error ? (
-        <h1>{error.message}</h1>
+      {products.length == 0 ? (
+        <Microphone setProducts={setProducts}/>
       ) : (
         <Grid
           container

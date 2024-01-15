@@ -1,11 +1,13 @@
 
 import React from 'react';
 import { Typography, Container, Box } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 const Instruction = ({ userType }) => {
   // Define video URLs for seller and buyer
-  const sellerVideoURL = 'https://example.com/seller-video.mp4';
+  const sellerVideoURL = 'https://youtu.be/Mw6ny7bOaUs';
   const buyerVideoURL = 'https://example.com/buyer-video.mp4';
+  const navigate = useNavigate()
 
   // Determine which video URL to use based on the user type
   const videoURL = userType === 'seller' ? sellerVideoURL : buyerVideoURL;
@@ -51,6 +53,9 @@ const Instruction = ({ userType }) => {
           </video>
         </div>
       </Container>
+      <Box onClick={() => {
+        navigate(userType == "seller" ? '/preview': '/shopsList')
+      }} >Start</Box>
     </Box>
   );
 };
