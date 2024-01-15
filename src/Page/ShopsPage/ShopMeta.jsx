@@ -1,20 +1,23 @@
 import { Typography } from "@mui/material";
 import { ShopMetaWrapper } from "../../Styles/ShopsPage/ShopsPage";
+import { Box } from "@mui/system";
 
-export default function ShoptMeta({product, matches}){
-    return(
-        <ShopMetaWrapper>
-            <Typography 
-            variant={matches? "h6":"h5"}
-            lineHeight={2}>
-             {product?.name}   
-            </Typography>
+export default function ShopMeta({ shop, matches }) {
+  return (
+    <ShopMetaWrapper>
+      <Box
+        style={{ margin: "5px" }}
+        sx={{
+          backgroundColor: shop.isOpen ? "green" : "red",
+          width: 20,
+          height: 20,
+          borderRadius: 50,
+        }}
+      />
+      <Typography variant={matches ? "h6" : "h5"} lineHeight={2}>
+        {shop?.name}
+      </Typography>
 
-            <Typography 
-            variant={matches? "caption":"body1"}>
-                ${product?.price}
-            </Typography>    
-            {console.log(product)}
-        </ShopMetaWrapper>
-    )
+    </ShopMetaWrapper>
+  );
 }

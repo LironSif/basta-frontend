@@ -14,7 +14,7 @@ export const NavigateLocation = () => {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
     };
-    fetch("https://basta-2zr3.onrender.com/api/v1/location", {
+    fetch("https://basta-2zr3.onrender.com/api/v1/users/location", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -27,7 +27,7 @@ export const NavigateLocation = () => {
   return (
     <NavigationIcon
       onClick={() => getLocation()}
-      style={{ color: "green", fontSize: 20, transform: "rotate(45deg)" }}
+      style={{ color: "green", fontSize: 25, transform: "rotate(45deg)", marginRight: "100px"}}
     />
   );
 };

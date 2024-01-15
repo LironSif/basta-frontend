@@ -4,21 +4,21 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 
-export default function Cards({ title, img, price }) {
+export default function Cards({product}) {
 return (
     <Card>
       <CardContent>
         <CardMedia
         component="img"
-        alt={`Image of ${title}`}
+        alt={`Image of ${product.item}`}
         height="300"
-        image={img} 
+        image={`https://source.unsplash.com/300x200/?${product.item}`} 
       />
         <Typography variant="h5" component="div" align='left'>
-          {title}
+          {product.item}
         </Typography>
         <Typography variant="body2" color="text.secondary" align='left'>
-          Price: {price}₪ <sub>kg</sub>
+          Price: {product.price}₪ <sub>{product.unit}</sub>
         </Typography>
       </CardContent>
     </Card>
