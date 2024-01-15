@@ -2,6 +2,7 @@ import { CircularProgress, Typography, Container, Box } from '@mui/material';
 import React, { useEffect, useRef, useState } from "react";
 import MicIcon from "@mui/icons-material/Mic";
 import TranslateIcon from '@mui/icons-material/Translate';
+import axios from 'axios';
 export default function Microphone({ setProducts }) {
   const [isRecording, setIsRecording] = useState(false);
   const [isTranslate, setIsTranslate] = useState(false);
@@ -46,11 +47,24 @@ export default function Microphone({ setProducts }) {
         body: formData,
       });
       const data = await response.json();
+      console.log('data: ', data);
       setProducts(data.items);
+      data.items.map(product => fetchingBastaItem(product , data['basta name']))
       setLoading(false)
     } catch (error) {
 
       console.error("Error sending audio to server:", error);
+    }
+  }
+  const fetchingBastaItem = async (item, bastaName)=> {
+    const newData = {name:item.item,  owner: bastaName , description:`description: ${bastaName}`,  price:parseInt(item.price) 
+  }
+  console.log('newData: ', newData);
+    try {
+      const response = await axios.post('https://basta-2zr3.onrender.com/api/v1/items', newData)
+      console.log(response)
+    } catch (error) {
+      console.error(error);
     }
   }
   const [loading, setLoading] = useState(true);
